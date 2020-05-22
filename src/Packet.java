@@ -22,6 +22,15 @@ public class Packet implements Serializable {
         this.code = code;
     }
 
+    public Packet(String code, Resultablica restab) {
+        this.code = code;
+        this.restab = restab;
+    }
+
+    public Packet(Person person) {
+        this.person = person;
+    }
+
     public Packet(String code, Person person) {
         this.code = code;
         this.person = person;

@@ -89,7 +89,7 @@ public class Profile extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String name = nameTextField.getText();
                 String surname = surnameTextField.getText();
-                String age = ageTextField.getText();
+                int age = Integer.parseInt(ageTextField.getText());
                 String region = (String) box.getSelectedItem();
 
 
@@ -100,7 +100,13 @@ public class Profile extends JPanel {
                 p.setRegion(region);
                 Main.user = p;
                 Packet pac = new Packet("ADD_USER", p);
+
                 Main.connect(pac);
+                Person per = new Person();
+                per.setName(name);
+                per.setSurname(surname);
+                Packet pl = new Packet("SIGN_IN",per);
+                Main.connect(pl);
 
 
                 Main.frame.profile.setVisible(false);

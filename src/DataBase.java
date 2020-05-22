@@ -2,23 +2,21 @@ import java.awt.datatransfer.StringSelection;
 import java.security.MessageDigest;
 import java.sql.*;
 import java.util.ArrayList;
-
 public class DataBase {
     Connection dbconnection;
     public Connection getDbconnection() throws ClassNotFoundException, SQLException {
-     String connect = "jdbc:mysql://localhost:3306/database?useUnicode=true&serverTimezone=UTC";
-     Class.forName("com.mysql.cj.jdbc.Driver");
-     dbconnection = DriverManager.getConnection(connect,"root","");
+        String connect = "jdbc:mysql://localhost:3306/database?useUnicode=true&serverTimezone=UTC";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        dbconnection = DriverManager.getConnection(connect,"root","");
         return dbconnection;
     }
-
     public void add(Person person){
         String insert1 = "INSERT INTO person ( name, surname, age, region) VALUES (?,?,?,?)";
         try{
             PreparedStatement pr1 = getDbconnection().prepareStatement(insert1);
             pr1.setString(1,person.getName());
             pr1.setString(2,person.getSurname());
-            pr1.setString(3,person.getAge());
+            pr1.setInt(3,person.getAge());
             pr1.setString(4,person.getRegion());
             pr1.executeUpdate();
             pr1.close();
@@ -26,23 +24,20 @@ public class DataBase {
             e.printStackTrace();
         }
     }
-
-    public Person getUser(Person person){
-        String select = "SELECT * FROM person WHERE person.name = ? AND person.surname = ? ";
+    public ResultSet getUser(Person person){
+        ResultSet resSet=null;
+        String select = "SELECT * FROM person WHERE name =\"" + person.getName() + "\" AND surname =\"" + person.getSurname() + "\"";
         try{
             PreparedStatement prst = getDbconnection().prepareStatement(select);
-            prst.setString(1,person.getName());
-            prst.setString(2,person.getSurname());
-            prst.executeQuery();
+            resSet=prst.executeQuery();
         } catch(SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            return person;
         }
+        return resSet;
     }
-
     public void add(Person person,Med med,Pt pt){
-        String insert2 = "INSERT INTO med (id_person,policlinic, weight, height,vision,scoliosis,flatfeet,pulse,registered with a doctor,mental hospital) VALUES (?,?,?,?,?,?,?,?,?,?)";
-        String insert3 = "INSERT INTO pt ( id_user, pull_ups, 100 m run, 3 km run) VALUES (?,?,?,?)";
+        String insert2 = "INSERT INTO med (id_person,policlinic, weight, height,vision,scoliosis,flatfeet,pulse,registered_with_a_doctor,mental_hospital) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String insert3 = "INSERT INTO pt ( id_user, pullups, 100_m_run, 3_km_run) VALUES (?,?,?,?)";
         try{
             PreparedStatement pr2 = getDbconnection().prepareStatement(insert2);
             pr2.setString(1,med.getId_person());
@@ -69,6 +64,19 @@ public class DataBase {
             e.printStackTrace();
         }
     }
+    public void add(Resultablica res){
+        String insert1 = "INSERT INTO result (result,id_person) VALUES (?,?)";
+        try{
+            PreparedStatement pr1 = getDbconnection().prepareStatement(insert1);
+            pr1.setString(1,res.getResult());
+            pr1.setString(2,res.getId_person());
+            pr1.executeUpdate();
+            pr1.close();
+        } catch(SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ResultSet getResults (){
         ResultSet res = null;
         String select = "SELECT * FROM result JOIN person ON result.id_person = person.id";
@@ -80,5 +88,4 @@ public class DataBase {
         }
         return res;
     }
-
 }

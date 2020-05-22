@@ -4,7 +4,7 @@ public class Person implements Serializable {
     private String id;
     private String name;
     private String surname;
-    private String age;
+    private int age;
     private String region;
 
     public Person(Object o, String name, String surname, String age, String region) {}
@@ -40,9 +40,9 @@ public class Person implements Serializable {
         this.surname = surname;
     }
 
-    public String getAge() { return age; }
+    public int getAge() { return age; }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
