@@ -150,37 +150,42 @@ public class Medicine extends JPanel {
         nextButton.setBackground(Color.lightGray);
         nextButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                String weight = weightTextField.getText();
-                String height = heightTextField.getText();
-                String vision = visionTextField.getText();
+                String policlinic = (String) box.getSelectedItem();
+                double weight = Double.parseDouble(weightTextField.getText());
+                int height = Integer.parseInt(heightTextField.getText());
+                double vision = Double.parseDouble(visionTextField.getText());
                 String scoliosis = (String) box1.getSelectedItem();
                 String flatfeet = (String) box2.getSelectedItem();
-                String pulse = pulseTextField.getText();
+                double pulse = Double.parseDouble(pulseTextField.getText());
                 String wereregisteredwithadoctor = (String) box3.getSelectedItem();
                 String mentalhospital = (String) box4.getSelectedItem();
-//                    Medicine2 mm = new Medicine2();
-//                    mm.setPoliclinic(box.getSelectedItem().toString());
-//                    mm.setWeight(weightTextField.getText());
-//                    mm.setHeight(heightTextField.getText());
-//                    mm.setVision(visionTextField.getText());
-//                    mm.setScoliosis(box1.getSelectedItem().toString());
-//                    mm.setFlatfeet(box2.getSelectedItem().toString());
-//                    mm.setPulse(pulseTextField.getText());
-//                    mm.setWereregistredwithadoctor(box3.getSelectedItem().toString());
-//                    mm.setMentalhospital(box4.getSelectedItem().toString());
-//                    Main.addMedicine2(mm);
 
-                if(box.getSelectedIndex()!=0){
-                    weightTextField.setText("");
-                    heightTextField.setText("");
-                    visionTextField.setText("");
-                    pulseTextField.setText("");
-                    box.setSelectedIndex(0);
-                    box1.setSelectedIndex(0);
-                    box2.setSelectedIndex(0);
-                    box3.setSelectedIndex(0);
-                    box4.setSelectedIndex(0);
-                }
+                Med m = new Med();
+                m.setPoliclinic(policlinic);
+                m.setWeight(weight);
+                m.setHeight(height);
+                m.setVision(vision);
+                m.setScoliosis(scoliosis);
+                m.setFlatfeet(flatfeet);
+                m.setPulse(pulse);
+                m.setWereregisteredwithadoctor(wereregisteredwithadoctor);
+                m.setMentalhospital(mentalhospital);
+                m.setId_person(Main.user.getId());
+
+                Main.user_med = m;
+
+//                if(box.getSelectedIndex()!=0){
+//                    weightTextField.setText("");
+//                    heightTextField.setText("");
+//                    visionTextField.setText("");
+//                    pulseTextField.setText("");
+//                    box.setSelectedIndex(0);
+//                    box1.setSelectedIndex(0);
+//                    box2.setSelectedIndex(0);
+//                    box3.setSelectedIndex(0);
+//                    box4.setSelectedIndex(0);
+//                }
+
                 Main.frame.medicine.setVisible(false);
                 Main.frame.physicaltraining.setVisible(true);
 

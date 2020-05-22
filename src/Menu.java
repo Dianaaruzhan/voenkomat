@@ -42,8 +42,11 @@ public class Menu extends JPanel {
         resultButton.setFont(f2);
         resultButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 Main.frame.menu.setVisible(false);
                 Main.frame.result.setVisible(true);
+                Packet p = new Packet("LIST_RESULT");
+                Main.connect(p);
 
             }
         });

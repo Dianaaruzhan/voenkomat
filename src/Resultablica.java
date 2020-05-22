@@ -1,7 +1,7 @@
 import java.io.Serializable;
 
 public class Resultablica implements Serializable  {
-    private Long id_person;
+    private String id_person;
     private String name;
     private String surname;
     private int age;
@@ -10,7 +10,7 @@ public class Resultablica implements Serializable  {
 
     public Resultablica() {}
 
-    public Resultablica(Long id_person, String name, String surname, int age, String region, String result) {
+    public Resultablica(String id_person, String name, String surname, int age, String region, String result) {
         this.id_person = id_person;
         this.name = name;
         this.surname = surname;
@@ -19,11 +19,11 @@ public class Resultablica implements Serializable  {
         this.result = result;
     }
 
-    public Long getId_person() {
+    public String getId_person() {
         return id_person;
     }
 
-    public void setId_person(Long id_person) {
+    public void setId_person(String id_person) {
         this.id_person = id_person;
     }
 
@@ -65,5 +65,12 @@ public class Resultablica implements Serializable  {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    @Override
+    public String toString() {
+       String s = "";
+       s = id_person + ") " + " NAME:"+ name + " "+ " SURNAME:" + surname + " " +" AGE:" + age +" "+ " REGION:" + region;
+       return s;
     }
 }

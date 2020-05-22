@@ -20,20 +20,38 @@ public class Main {
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-            if (p.getCode().equals("Add")) {
+            if (p.getCode().equals("ADD")) {
                 oos.writeObject(p);
             }
-            else if(p.getCode().equals("List")){
+            else if(p.getCode().equals("LIST_RESULT")){
                 oos.writeObject(p);
-                Packet FromServer = (Packet) ois.readObject();
-                ArrayList <Person> ArrayListFromServer = FromServer.getPersons();
-
+                Packet infoFroMServer = (Packet) ois.readObject();
+                ArrayList<Resultablica> resu = infoFroMServer.getRestabb();
                 String s = "";
-                for(int i=0;i<ArrayListFromServer.size();i++){
-                    s+=ArrayListFromServer.get(i)+"\n";
+                for(int i=0;i<resu.size();i++){
+                    s+=resu.get(i).toString()+"\n";
+                    System.out.println(s);
                 }
+
                 Result.tarea.append(s);
+            }else if (p.getCode().equals("ADD_USER")){
+                oos.writeObject(p);
+                Packet info = (Packet)ois.readObject();
+                Person person = info.getPerson();
+                Main.user = person;
+
             }
+//            else if(p.getCode().equals("List")){
+//                oos.writeObject(p);
+//                Packet FromServer = (Packet) ois.readObject();
+//                ArrayList <Person> ArrayListFromServer = FromServer.getPersons();
+//
+//                String s = "";
+//                for(int i=0;i<ArrayListFromServer.size();i++){
+//                    s+=ArrayListFromServer.get(i)+"\n";
+//                }
+//                Result.tarea.append(s);
+//            }
             oos.close();
             ois.close();
             socket.close();

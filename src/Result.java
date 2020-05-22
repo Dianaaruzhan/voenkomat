@@ -7,7 +7,6 @@ public class Result extends JPanel{
     private JLabel resultLabel;
     private JButton menu;
     private JButton refresh;
-    private JButton next;
     public static JTextArea tarea;
     private DefaultTableModel model;
     private JScrollPane pane;
@@ -44,10 +43,7 @@ public class Result extends JPanel{
         refresh.setBackground(Color.lightGray);
         refresh.setFont(f2);
 
-        next = new JButton("Next");
-        next.setBounds(825,600,150,50);
-        next.setBackground(Color.lightGray);
-        next.setFont(f2);
+
 
         menu = new JButton("Menu");
         menu.setBounds(425,600,150,50);
@@ -64,24 +60,17 @@ public class Result extends JPanel{
 
         refresh.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-
-
-                Packet p = new Packet("List");
+                Packet p = new Packet("LIST_RESULT");
                 Main.connect(p);
             }
         });
         add(refresh);
 
-        next.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                Main.frame.result.setVisible(false);
-                Main.frame.allinfo.setVisible(true);
-            }
-        });
-        add(next);
+
 
         tarea = new JTextArea();
         tarea.setBounds(350, 80, 700, 500);
+        tarea.setFont(new Font("Arial", Font.BOLD,15));
         add(tarea);
     }
 }

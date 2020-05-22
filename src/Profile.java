@@ -92,30 +92,30 @@ public class Profile extends JPanel {
                 String age = ageTextField.getText();
                 String region = (String) box.getSelectedItem();
 
-                Person person = new Person (null, name, surname, age, region);
-                Packet pp = new Packet("Add", person);
-                Main.connect(pp);
 
                 Person p = new Person();
-                p.setName(nameTextField.getText());
-                p.setSurname(surnameTextField.getText());
-                p.setAge(ageTextField.getText());
-                p.setRegion(box.getSelectedItem().toString());
+                p.setName(name);
+                p.setSurname(surname);
+                p.setAge(age);
+                p.setRegion(region);
                 Main.user = p;
+                Packet pac = new Packet("ADD_USER", p);
+                Main.connect(pac);
+
 
                 Main.frame.profile.setVisible(false);
                 Main.frame.medicine.setVisible(true);
-                if(box.getSelectedIndex() !=0 ){
-                    nameTextField.setText("");
-                    surnameTextField.setText("");
-                    ageTextField.setText("");
-                    box.setSelectedIndex(0);
-
-//                    if(ageTextField.getText() <= 18){
-////                        Main.frame.profile.setVisible(false);
-////                        Main.frame.apologies.setVisible(true);
-////                    }//
-                }
+//                if(box.getSelectedIndex() !=0 ){
+//                    nameTextField.setText("");
+//                    surnameTextField.setText("");
+//                    ageTextField.setText("");
+//                    box.setSelectedIndex(0);
+//
+////                    if(ageTextField.getText() <= 18){
+//////                        Main.frame.profile.setVisible(false);
+//////                        Main.frame.apologies.setVisible(true);
+//////                    }//
+//                }
             }
         });
         add(nextButton);
