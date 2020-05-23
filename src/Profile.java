@@ -102,11 +102,10 @@ public class Profile extends JPanel {
                 Packet pac = new Packet("ADD_USER", p);
 
                 Main.connect(pac);
-                Person per = new Person();
-                per.setName(name);
-                per.setSurname(surname);
-                Packet pl = new Packet("SIGN_IN",per);
+
+                Packet pl = new Packet("SIGN_IN",p);
                 Main.connect(pl);
+                System.out.println(p.getId());
 
 
                 Main.frame.profile.setVisible(false);

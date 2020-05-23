@@ -34,7 +34,7 @@ public class Main {
             } else if (p.getCode().equals("SIGN_IN")){
                 oos.writeObject(p);
                 Packet info = (Packet)ois.readObject();
-                Main.user = info.getPerson();
+                Main.user.setId(info.getPerson().getId());
             } else if (p.getCode().equals("ADD_FINAL")) {
                 oos.writeObject(p);
             }else if (p.getCode().equals("UPDATE_UPS")) {
